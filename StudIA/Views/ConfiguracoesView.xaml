@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="StudIA.Views.ConfiguracoesView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StudIA.Views"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+      xmlns:vm="clr-namespace:StudIA.ViewModels" xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <vm:ConfiguracoesViewModel />
+    </UserControl.DataContext>
+
+    <Grid Margin="50,50,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Informações do Usuário -->
+        <Grid Grid.Row="0" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ID do Usuário -->
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ID do Usuário" Foreground="White" FontSize="22" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Id}" Foreground="White" FontSize="16"/>
+            </StackPanel>
+
+            <!-- Nome de Usuário -->
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Nome de Usuário" Foreground="White" FontSize="22" FontWeight="Bold"/>
+                <TextBlock Text="{Binding NomeUsuario}" Foreground="White" FontSize="16"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Títulos "Email" e "Foto de Perfil" -->
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Título "Email" -->
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Email" Foreground="White" FontSize="22" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Email}" Foreground="White" FontSize="16"/>
+
+                <!-- Botão Logout -->
+                <Button Background="Red" Foreground="White" Command="{Binding LogoutCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20">
+                    <StackPanel Orientation="Horizontal">
+                        <materialIcons:MaterialIcon Kind="Logout" Height="20" Width="20" Foreground="White" Margin="5"/>
+                        <TextBlock Text="Logout" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <!-- Título "Foto de Perfil" -->
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <TextBlock Text="Foto de Perfil" Foreground="White" FontSize="22" FontWeight="Bold"/>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20">
+                    <!-- Email -->
+
+                    <!-- Botão e Elipse (Foto de Perfil) -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0">
+                        <Ellipse Cursor="Hand" Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,30,0">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Image}" />
+                            </Ellipse.Fill>
+                            <Ellipse.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding TrocarImagemCommand}" CommandParameter="{Binding ElementName=ThisWindow}"/>
+                            </Ellipse.InputBindings>
+                        </Ellipse>
+
+                        <!-- Adicione mais informações conforme necessário -->
+                    </StackPanel>
+
+                    <!-- Adicione mais informações conforme necessário -->
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>
